@@ -110,8 +110,6 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">University of Central Florida</span>
-            <br>
-            <span class="author-block"><i>Under review at NeurIPS</i></span>
           </div>
 
           <div class="column has-text-centered">
@@ -263,9 +261,9 @@
           <ol>
             <li>
               <b>FinTradeBench Benchmark.</b> A new benchmark of 1,400 questions grounded in
-              NASDAQ-100 companies over a decade (2015&ndash;2025), integrating SEC filings
+              NASDAQ-100 companies over a decade (2015-2025), integrating SEC filings
               (10-K/10-Q) and daily OHLCV trading data. Each question is annotated with
-              <i>Golden Indicators</i> &mdash; the minimal set of financial variables required to
+              <i>Golden Indicators</i> - the minimal set of financial variables required to
               support a correct answer.
             </li>
             <li>
@@ -276,13 +274,13 @@
             <li>
               <b>Calibration-then-Scaling Framework.</b> A scalable pipeline that combines
               150 expert-authored seed questions, multi-model candidate generation, intra-model
-              self-filtering, automated numerical auditing, and human&ndash;LLM judge alignment
+              self-filtering, automated numerical auditing, and human-LLM judge alignment
               (MAE&nbsp;&lt;&nbsp;10%) before scaling to the full 1,400-question benchmark.
             </li>
             <li>
               <b>Benchmarking 14 LLMs under No-RAG and RAG.</b> RAG yields large gains on
               fundamentals (+37%) and hybrid (+55%) questions, but limited or negative gains on
-              trading-signal questions &mdash; exposing a retrieval-to-reasoning bottleneck for
+              trading-signal questions, exposing a retrieval-to-reasoning bottleneck for
               numerical time-series data.
             </li>
           </ol>
@@ -305,13 +303,12 @@
           <div class="content has-text-justified">
             <p align="justify">
               <b>Figure 2.</b> The FinTradeBench design pipeline has three primary components:
-              <b><span style="color: blue;">(1) Data &amp; Design (Left)</span></b> &mdash; we aggregate
+              <b><span style="color: blue;">(1) Data &amp; Design (Left)</span></b>: We aggregate
               regulatory filings (SEC 10-K / 10-Q) and daily OHLCV trading data for NASDAQ-100
               companies over 2015&ndash;2025, aligned by ticker and quarter;
-              <b><span style="color: blue;">(2) Question Taxonomy (Middle-left)</span></b> &mdash; F,
+              <b><span style="color: blue;">(2) Question Taxonomy (Middle-left)</span></b>: F,
               T, and FT categories each annotated with Golden Indicators;
-              <b><span style="color: blue;">(3) Calibration-then-Scaling (Middle-right &amp; Right)</span></b>
-              &mdash; expert-guided seed construction, evaluation &amp; human&ndash;LLM judge
+              <b><span style="color: blue;">(3) Calibration-then-Scaling (Middle-right &amp; Right)</span></b>: expert-guided seed construction, evaluation &amp; human&ndash;LLM judge
               alignment, followed by automated scaling.
             </p>
           </div>
@@ -329,7 +326,7 @@
           <p>
             FinTradeBench questions are organized into three reasoning categories that probe
             distinct competencies. Each question is paired with expert-defined
-            <b>Golden Indicators (G.I.)</b> &mdash; the minimal set of financial variables required
+            <b>Golden Indicators (G.I.)</b> - the minimal set of financial variables required
             to support a correct answer.
           </p>
           <ul>
@@ -339,13 +336,12 @@
               from regulatory filings.
             </li>
             <li>
-              <b>Trading-Focused (T-type):</b> Reasoning over price&ndash;time-series&ndash;derived
+              <b>Trading-Focused (T-type):</b> Reasoning over price&ndash;time-series derived
               indicators such as moving averages, momentum, realized volatility, drawdowns, and
               volume measures.
             </li>
             <li>
-              <b>Hybrid (FT-type):</b> Joint reasoning across both fundamental and trading signals
-              &mdash; the highest cognitive-load category, requiring models to reconcile potentially
+              <b>Hybrid (FT-type):</b> Joint reasoning across both fundamental and trading signals; the highest cognitive-load category, requiring models to reconcile potentially
               conflicting evidence.
             </li>
           </ul>
@@ -536,7 +532,7 @@
             but degrades performance on trading-signal questions. Latent reasoning models such as
             DeepSeek-R1 and its distillations substantially outperform standard instruction-tuned
             models on hybrid questions, and model families exhibit very different sensitivities to
-            context &mdash; Qwen models generally benefit from RAG while LLaMA models degrade
+            context; Qwen models generally benefit from RAG while LLaMA models degrade
             overall, even at 70B parameters. In future work we plan to augment FinTradeBench,
             diversify the evaluation pipeline, and explore agentic RAG.
           </p>
