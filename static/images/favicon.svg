@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#1f4e79"/>
+  <text x="50%" y="58%" font-family="Arial, sans-serif" font-weight="700"
+        font-size="38" text-anchor="middle" fill="#ffffff">F</text>
+  <path d="M14 50 L22 42 L30 46 L40 32 L50 36" stroke="#7fd17f" stroke-width="3"
+        fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

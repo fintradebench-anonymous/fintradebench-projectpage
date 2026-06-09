@@ -1,0 +1,15 @@
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Build / temp
+*.log
+node_modules/
+.cache/
