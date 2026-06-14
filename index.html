@@ -194,8 +194,8 @@
           grounded in <b>NASDAQ-100 companies</b> over a <b>ten-year</b> window (2015&ndash;2025) that
           evaluates LLMs on <b>fundamentals-focused</b>, <b>trading-signal-focused</b>, and
           <b>hybrid</b> reasoning questions. We benchmark <b>14 LLMs</b> under zero-shot prompting
-          and retrieval-augmented settings, revealing a clear performance gap in numerical and
-          time-series financial reasoning.
+          and retrieval-augmented generation (RAG) settings, revealing a clear performance gap in
+          numerical and time-series financial reasoning.
         </p>
 
         <div class="column">
@@ -243,10 +243,10 @@
             <i>calibration-then-scaling</i> framework that combines expert seed questions,
             multi-model response generation, intra-model self-filtering, numerical auditing, and
             human&ndash;LLM judge alignment. We evaluate <b>14 LLMs</b> under zero-shot prompting and
-            retrieval-augmented settings and witness a clear performance gap. Retrieval substantially
-            improves reasoning over textual fundamentals, but provides limited benefit for
-            trading-signal reasoning. These findings highlight fundamental challenges in numerical
-            and time-series reasoning for current LLMs and motivate future research in financial
+            retrieval-augmented generation (RAG) settings and witness a clear performance gap.
+            Retrieval substantially improves reasoning over textual fundamentals, but provides limited
+            benefit for trading-signal reasoning. These findings highlight fundamental challenges in
+            numerical and time-series reasoning for current LLMs and motivate future research in financial
             intelligence.
           </p>
         </div>
@@ -357,7 +357,7 @@
       <!-- RAG Architecture -->
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3 has-text-centered">Domain-Aware Hybrid Retrieval (RAG)</h2>
+          <h2 class="title is-3 has-text-centered">Domain-Aware Hybrid Retrieval-Augmented Generation (RAG)</h2>
           <div class="content has-text-centered">
             <img src="./static/images/rag_architecture.png" alt="Dual-track RAG pipeline used in FinTradeBench."
               style="max-width:100%">
