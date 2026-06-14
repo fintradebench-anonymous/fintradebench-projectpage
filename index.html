@@ -444,7 +444,21 @@
                 questions, Gemini 2.5 Flash gains +23.8%, and DeepSeek-R1 gains +23.6%. In contrast,
                 Gemini 2.5 Flash-Lite, GPT-5-mini, and LLaMA 3.3 Instruct (70B) drop 16&ndash;20%
                 on T-type questions even when the temporal retrieval track surfaces relevant price
-                chunks &mdash; models fail to compute indicators from raw numerical tables.
+                chunks. Models fail to compute indicators from raw numerical tables.
+                Figure&nbsp;1 above shows this failure mode concretely on the NVIDIA July&nbsp;2025
+                pullback question: there was no pullback, yet every proprietary LLM either missed
+                the pullback diagnosis or wrongly recommended buying.
+              </p>
+              <p>
+                <b>Why this happens.</b> SEC filings are legally mandated public records indexed by
+                EDGAR and widely represented in pre-training corpora, so LLMs enter evaluation with
+                strong latent representations of fundamental concepts and RAG acts as a grounding
+                anchor that activates this prior knowledge. Company ticker-level trading data and proprietary
+                technical signals, by contrast, sit behind paywalls (Bloomberg, Refinitiv) and are
+                scarce in pre-training data. Models, therefore, lack the representational
+                framework needed to reason over retrieved numerical price tables, and injecting that
+                unfamiliar structure into the context causes <i>distraction</i> rather than
+                augmentation.
               </p>
             </div>
 
@@ -457,17 +471,22 @@
             </p>
             <br>
           </div>
-
-          <h3 class="title is-4 has-text-left">Reasoning LLMs Dominate Hybrid Questions</h3>
           <div class="content has-text-centered">
             <div class="content has-text-justified">
               <p>
-                <b>(2)</b> Hybrid (FT) questions impose the highest cognitive load. DeepSeek-R1
-                achieved the highest Hybrid RAG accuracy at <b>46.4%</b> (+39.8% over its No-RAG
-                baseline). The capability transfers to distilled open-weight models:
-                <b>R1-Distill-Qwen (32B) +55.1%</b> and <b>R1-Distill-Qwen (14B) +49.5%</b> on FT
-                questions. Latent chain-of-thought reasoning is the differentiator &mdash; not
-                parameter count.
+                <b>(2) Reasoning LLMs dominate hybrid questions.</b> Hybrid (FT) questions impose
+                the highest cognitive load &mdash; requiring a model to retrieve company
+                fundamentals, retrieve trading-signal context, and reason across both.
+                DeepSeek-R1 achieved the highest Hybrid RAG accuracy at <b>46.4%</b> (+39.8% over
+                its No-RAG baseline), and the capability transfers cleanly to distilled
+                open-weight models: <b>R1-Distill-Qwen (32B) +55.1%</b> and
+                <b>R1-Distill-Qwen (14B) +49.5%</b> on FT questions. Standard
+                instruction-tuned models without explicit reasoning steps, by contrast, show
+                modest or even <i>negative</i> gains on this category &mdash; striking evidence
+                that the 14B distilled Qwen reasoner outperforms much larger instruction-tuned
+                baselines, including LLaMA&nbsp;3.3&nbsp;Instruct (70B), under RAG.
+                Inference-time chain-of-thought is what reconciles conflicting signal types
+                &mdash; <i>not parameter count.</i>
               </p>
             </div>
             <img src="./static/images/quality_metric.png" alt="Global quality metrics: No-RAG vs RAG."
@@ -481,16 +500,38 @@
             <br>
           </div>
 
-          <h3 class="title is-4 has-text-left">LLMs are Distracted by RAG-Based Extra Information</h3>
           <div class="content has-text-justified">
             <p>
-              <b>(3)</b> Despite grounding answers in fundamental texts, the precise reasoning over
-              Golden Indicators <i>decreases</i> with RAG. This shows that dense financial context
-              improves <i>surface-level factual grounding</i> but actively suppresses the abstract
-              analytical reasoning that expert evaluation requires. Models absorb retrieved
+              <b>(3) RAG actively harms certain model families regardless of parameter count.</b>
+              While Qwen models and their DeepSeek distillations show significant gains
+              (<i>p</i>&nbsp;&lt;&nbsp;0.01), the LLaMA family exhibits systematic degradation:
+              LLaMA&nbsp;3.3&nbsp;Instruct (70B) declines <b>9.5%</b> overall (&minus;7.9% on F,
+              &minus;18.0% on T, &minus;3.7% on FT), R1-Distill-LLaMA (70B) declines <b>7.7%</b>,
+              and LLaMA&nbsp;3.1&nbsp;Instruct (8B) drops <b>1.7%</b>. Most strikingly,
+              <b>the 14B R1-Distill-Qwen model outperforms all three LLaMA models under RAG</b>
+              despite having far fewer parameters. This suggests architecture and pre-training data
+              mixture matter more than scale &mdash; LLaMA base weights appear highly susceptible
+              to distraction by dense, jargon-heavy SEC text and unstructured numerical tables,
+              abandoning internal reasoning for surface-level context summarization.
+            </p>
+          </div>
+
+          <div class="content has-text-justified">
+            <p>
+              <b>(4) LLMs are distracted by RAG-based extra information.</b> Despite grounding
+              answers in fundamental texts, precise reasoning over Golden Indicators
+              <i>decreases</i> with RAG: G.I.&nbsp;F1 collapses by <b>56.5%</b> and Reasoning
+              Depth drops <b>10.8%</b>, even as Fundamental Integration improves by 13.4%
+              (see Figure&nbsp;4 above). Dense financial context improves
+              <i>surface-level factual grounding</i> but actively suppresses the abstract
+              analytical reasoning that expert evaluation requires &mdash; models absorb retrieved
               documents and produce fluent, citation-heavy summaries, yet fail to isolate the
-              specific signals an expert would prioritize. <b>Injecting rich evidence while
-                preserving an LLM's analytical depth remains the central challenge in financial RAG.</b>
+              specific signals an expert would prioritize. <b>The AAPL case study below makes this
+                concrete</b>: under Standard RAG the model is overwhelmed by raw revenue totals and
+              daily prices and never reaches the Book/Price ratio (0.02) or the RSI (60.39) that
+              actually decide the call; only when those Golden Indicators are pre-computed does it
+              produce a defensible conclusion. <b>Injecting rich evidence while preserving an
+                LLM's analytical depth remains the central challenge in financial RAG.</b>
             </p>
           </div>
 
@@ -536,7 +577,6 @@
               overall, even at 70B parameters. In future work we plan to augment FinTradeBench,
               diversify the evaluation pipeline, and explore agentic RAG.
             </p>
-            <p>For full details, please refer to the main paper. Thank you!</p>
           </div>
         </div>
       </div>
