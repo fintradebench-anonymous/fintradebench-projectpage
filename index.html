@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FinTradeBench: A Financial Reasoning Benchmark for LLMs</title>
 
   <meta name="description"
-        content="FinTradeBench is a benchmark of 1,400 questions on NASDAQ-100 companies that evaluates financial reasoning across company fundamentals (SEC filings) and trading signals (OHLCV time-series) for Large Language Models.">
-  <meta name="keywords" content="FinTradeBench, Financial Reasoning, LLM Benchmark, RAG, Trading Signals, SEC Filings, NeurIPS">
+    content="FinTradeBench is a benchmark of 1,400 questions on NASDAQ-100 companies that evaluates financial reasoning across company fundamentals (SEC filings) and trading signals (OHLCV time-series) for Large Language Models.">
+  <meta name="keywords"
+    content="FinTradeBench, Financial Reasoning, LLM Benchmark, RAG, Trading Signals, SEC Filings, NeurIPS">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="FinTradeBench: A Financial Reasoning Benchmark for LLMs"/>
-  <meta property="og:description" content="A benchmark of 1,400 questions across NASDAQ-100 evaluating LLM reasoning over company fundamentals and trading signals."/>
-  <meta property="og:url" content="https://arxiv.org/abs/2603.19225"/>
-  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="FinTradeBench: A Financial Reasoning Benchmark for LLMs" />
+  <meta property="og:description"
+    content="A benchmark of 1,400 questions across NASDAQ-100 evaluating LLM reasoning over company fundamentals and trading signals." />
+  <meta property="og:url" content="https://arxiv.org/abs/2603.19225" />
+  <meta property="og:type" content="website" />
 
   <!-- Fonts & CSS -->
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
@@ -48,31 +49,40 @@
       background: #fff;
       height: 100%;
     }
+
     .social-card:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
       transform: translateY(-2px);
     }
+
     .social-card .icon-row {
       display: flex;
       align-items: center;
       gap: .5rem;
       margin-bottom: .35rem;
     }
-    .social-card .icon-row i { font-size: 1.25rem; }
+
+    .social-card .icon-row i {
+      font-size: 1.25rem;
+    }
+
     .social-card .platform {
       font-weight: 600;
       font-size: 0.9rem;
       color: #555;
     }
+
     .social-card .title-text {
       font-weight: 600;
       color: #222;
       margin-bottom: .25rem;
     }
+
     .social-card .meta {
       color: #888;
       font-size: 0.85rem;
     }
+
     .tag-pill {
       display: inline-block;
       font-size: 0.75rem;
@@ -82,7 +92,9 @@
       color: #555;
       margin-right: 4px;
     }
-    .results-table th, .results-table td {
+
+    .results-table th,
+    .results-table td {
       font-size: 13px;
       text-align: center;
       padding: 6px 8px;
@@ -92,811 +104,732 @@
 
 <body>
 
-<!-- ===================== HERO / TITLE ===================== -->
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-2 publication-title">FinTradeBench: A Financial Reasoning Benchmark for LLMs</h1>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">Yogesh Agrawal,</span>
-            <span class="author-block">Aniruddha Dutta,</span>
-            <span class="author-block">Md Mahadi Hasan,</span>
-            <span class="author-block">Santu Karmaker,</span>
-            <span class="author-block">Aritra Dutta</span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">University of Central Florida</span>
-          </div>
-
+  <!-- ===================== HERO / TITLE ===================== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- arXiv -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2603.19225" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+            <h1 class="title is-2 publication-title">FinTradeBench: A Financial Reasoning Benchmark for LLMs</h1>
 
-              <!-- Dataset -->
-              <span class="link-block">
-                <a href="https://dataverse.harvard.edu/previewurl.xhtml?token=7424f412-d56d-4a3e-9469-907c243444fb"
-                   target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-database"></i></span>
-                  <span>Dataset</span>
-                </a>
-              </span>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Yogesh Agrawal,</span>
+              <span class="author-block">Aniruddha Dutta,</span>
+              <span class="author-block">Md Mahadi Hasan,</span>
+              <span class="author-block">Santu Karmaker,</span>
+              <span class="author-block">Aritra Dutta</span>
+            </div>
 
-              <!-- Code -->
-              <span class="link-block">
-                <a href="https://github.com/fintradebench-anonymous/PaperSubmission"
-                   target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code</span>
-                </a>
-              </span>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">University of Central Florida</span>
+            </div>
 
-              <!-- BibTeX -->
-              <span class="link-block">
-                <a href="#bibtex"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-obp"></i></span>
-                  <span>BibTeX</span>
-                </a>
-              </span>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- arXiv -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2603.19225" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
 
-              <!-- Cited By -->
-              <span class="link-block">
-                <a href="#cited-by"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-quote-right"></i></span>
-                  <span>Cited&nbsp;By</span>
-                </a>
-              </span>
+                <!-- Dataset -->
+                <span class="link-block">
+                  <a href="https://dataverse.harvard.edu/previewurl.xhtml?token=7424f412-d56d-4a3e-9469-907c243444fb"
+                    target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
 
-              <!-- Social Media -->
-              <span class="link-block">
-                <a href="#social-media"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-share-alt"></i></span>
-                  <span>In&nbsp;the&nbsp;Wild</span>
-                </a>
-              </span>
+                <!-- Code -->
+                <span class="link-block">
+                  <a href="https://github.com/fintradebench-anonymous/PaperSubmission" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- BibTeX -->
+                <span class="link-block">
+                  <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-obp"></i></span>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
+
+                <!-- Social Media -->
+                <span class="link-block">
+                  <a href="#social-media" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-share-alt"></i></span>
+                    <span>Media&nbsp;Coverage&nbsp;&&nbsp;Social</span>
+                  </a>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== TEASER ===================== -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
+  <!-- ===================== TEASER ===================== -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <p align="justify">
+          Real-world financial decision-making requires reasoning over heterogeneous signals: company
+          fundamentals derived from regulatory filings <i>and</i> trading signals computed from price
+          dynamics. We introduce <b><i>FinTradeBench</i></b>, a benchmark of <b>1,400 questions</b>
+          grounded in <b>NASDAQ-100 companies</b> over a <b>ten-year</b> window (2015&ndash;2025) that
+          evaluates LLMs on <b>fundamentals-focused</b>, <b>trading-signal-focused</b>, and
+          <b>hybrid</b> reasoning questions. We benchmark <b>14 LLMs</b> under zero-shot prompting
+          and retrieval-augmented settings, revealing a clear performance gap in numerical and
+          time-series financial reasoning.
+        </p>
+
+        <div class="column">
+          <div style="text-align:center;">
+            <img src="./static/images/teaser.png"
+              alt="FinTradeBench teaser: comparison of proprietary LLMs on a trading-signal question."
+              style="max-width:100%">
+            <div class="content has-text-justified">
+              <p align="justify">
+                <b>Figure 1.</b> Performance comparison of proprietary LLMs on a trading-signal&ndash;focused
+                question (&ldquo;Is NVIDIA's pullback in July 2025 a buying opportunity?&rdquo;). There
+                was no pullback in NVIDIA's stock in July 2025; only Claude correctly identified the
+                pullback component. On the buying component, all LLMs failed &mdash; underscoring how
+                LLMs struggle to reason over trading signals derived from price dynamics.
+              </p>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABSTRACT ===================== -->
+  <section class="hero is-light is-small">
     <div class="hero-body">
-      <p align="justify">
-        Real-world financial decision-making requires reasoning over heterogeneous signals: company
-        fundamentals derived from regulatory filings <i>and</i> trading signals computed from price
-        dynamics. We introduce <b><i>FinTradeBench</i></b>, a benchmark of <b>1,400 questions</b>
-        grounded in <b>NASDAQ-100 companies</b> over a <b>ten-year</b> window (2015&ndash;2025) that
-        evaluates LLMs on <b>fundamentals-focused</b>, <b>trading-signal-focused</b>, and
-        <b>hybrid</b> reasoning questions. We benchmark <b>14 LLMs</b> under zero-shot prompting
-        and retrieval-augmented settings, revealing a clear performance gap in numerical and
-        time-series financial reasoning.
-      </p>
+      <div class="container is-max-desktop has-text-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Real-world financial decision-making is a challenging problem that requires reasoning over
+            heterogeneous signals, including company fundamentals derived from regulatory filings and
+            trading signals computed from price dynamics. Recently, with advances in Large Language
+            Models (LLMs), financial analysts have begun to use them for financial decision-making
+            tasks. However, existing financial question-answering benchmarks for testing these models
+            primarily focus on company balance sheet data and rarely evaluate reasoning about how
+            company stocks trade in the market or their interactions with fundamentals. To leverage
+            the strengths of both approaches, we introduce <b>FinTradeBench</b>, a benchmark for
+            evaluating financial reasoning that integrates company fundamentals and trading signals.
+            FinTradeBench contains <b>1,400 questions</b> grounded in NASDAQ-100 companies over a
+            ten-year historical window. The benchmark is organized into three reasoning categories:
+            <i>fundamentals-focused</i>, <i>trading-signal-focused</i>, and <i>hybrid</i> questions
+            requiring cross-signal reasoning. To ensure reliability at scale, we adopt a
+            <i>calibration-then-scaling</i> framework that combines expert seed questions,
+            multi-model response generation, intra-model self-filtering, numerical auditing, and
+            human&ndash;LLM judge alignment. We evaluate <b>14 LLMs</b> under zero-shot prompting and
+            retrieval-augmented settings and witness a clear performance gap. Retrieval substantially
+            improves reasoning over textual fundamentals, but provides limited benefit for
+            trading-signal reasoning. These findings highlight fundamental challenges in numerical
+            and time-series reasoning for current LLMs and motivate future research in financial
+            intelligence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="column">
-        <div style="text-align:center;">
-          <img src="./static/images/teaser.png"
-               alt="FinTradeBench teaser: comparison of proprietary LLMs on a trading-signal question."
-               style="max-width:100%">
+  <!-- ===================== CONTRIBUTIONS ===================== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">
+            <i>FinTradeBench</i> is the first benchmark that jointly evaluates LLM's reasoning over
+            company fundamentals and trading signals
+          </h2>
           <div class="content has-text-justified">
-            <p align="justify">
-              <b>Figure 1.</b> Performance comparison of proprietary LLMs on a trading-signal&ndash;focused
-              question (&ldquo;Is NVIDIA's pullback in July 2025 a buying opportunity?&rdquo;). There
-              was no pullback in NVIDIA's stock in July 2025; only Claude correctly identified the
-              pullback component. On the buying component, all LLMs failed &mdash; underscoring how
-              LLMs struggle to reason over trading signals derived from price dynamics.
-            </p>
+            <h5><b>Main contributions:</b></h5>
+            <ol>
+              <li>
+                <b>FinTradeBench Benchmark.</b> A new benchmark of 1,400 questions grounded in
+                NASDAQ-100 companies over a decade (2015-2025), integrating SEC filings
+                (10-K/10-Q) and daily OHLCV trading data. Each question is annotated with
+                <i>Golden Indicators</i> - the minimal set of financial variables required to
+                support a correct answer.
+              </li>
+              <li>
+                <b>Three-Category Question Taxonomy.</b> Questions are split into
+                <i>Fundamentals-Focused (F)</i>, <i>Trading-Focused (T)</i>, and <i>Hybrid (FT)</i>
+                reasoning, enabling granular diagnosis of where models succeed and fail.
+              </li>
+              <li>
+                <b>Calibration-then-Scaling Framework.</b> A scalable pipeline that combines
+                150 financial expert-authored seed questions, multi-model candidate generation, intra-model
+                self-filtering, automated numerical auditing, and human-LLM judge alignment
+                (MAE&nbsp;&lt;&nbsp;10%) before scaling to the full 1,400-question benchmark.
+              </li>
+              <li>
+                <b>Benchmarking 14 LLMs under No-RAG and RAG.</b> RAG yields large gains on
+                fundamentals (+37%) and hybrid (+55%) questions, but limited or negative gains on
+                trading-signal questions, exposing a retrieval-to-reasoning bottleneck for
+                numerical time-series data.
+              </li>
+            </ol>
           </div>
         </div>
       </div>
-      <br>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== ABSTRACT ===================== -->
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop has-text-centered">
-      <h2 class="title is-3">Abstract</h2>
+  <!-- ===================== PIPELINE ===================== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">FinTradeBench Design Pipeline</h2>
+          <div class="content has-text-centered">
+            <img src="./static/images/pipeline.png" alt="FinTradeBench design pipeline" style="max-width:100%">
+            <div class="content has-text-justified">
+              <p align="justify">
+                <b>Figure 2.</b> The FinTradeBench design pipeline has three primary components:
+                <b><span style="color: blue;">(1) Data &amp; Design (Left)</span></b>: We aggregate
+                regulatory filings (SEC 10-K / 10-Q) and daily OHLCV trading data for NASDAQ-100
+                companies over 2015&ndash;2025, aligned by ticker and quarter;
+                <b><span style="color: blue;">(2) Question Taxonomy (Middle-left)</span></b>: F,
+                T, and FT categories each annotated with Golden Indicators;
+                <b><span style="color: blue;">(3) Calibration-then-Scaling (Middle-right &amp; Right)</span></b>:
+                expert-guided seed construction, evaluation &amp; human&ndash;LLM judge
+                alignment, followed by automated scaling.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+
+      <!-- Question Taxonomy -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Question Taxonomy</h2>
+          <div class="content has-text-justified">
+            <p>
+              FinTradeBench questions are organized into three reasoning categories that probe
+              distinct competencies. Each question is paired with expert-defined
+              <b>Golden Indicators (G.I.)</b> - the minimal set of financial variables required
+              to support a correct answer.
+            </p>
+            <ul>
+              <li>
+                <b>Fundamentals-Focused (F-type):</b> Reasoning over accounting-based indicators such
+                as ROA, ROE, Earnings/Price, Book/Price, Debt/Equity, and Sales/Assets, extracted
+                from regulatory filings.
+              </li>
+              <li>
+                <b>Trading-Focused (T-type):</b> Reasoning over price&ndash;time-series derived
+                indicators such as moving averages, momentum, realized volatility, drawdowns, and
+                volume measures.
+              </li>
+              <li>
+                <b>Hybrid (FT-type):</b> Joint reasoning across both fundamental and trading signals; the highest
+                cognitive-load category, requiring models to reconcile potentially
+                conflicting evidence.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- RAG Architecture -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Domain-Aware Hybrid Retrieval (RAG)</h2>
+          <div class="content has-text-centered">
+            <img src="./static/images/rag_architecture.png" alt="Dual-track RAG pipeline used in FinTradeBench."
+              style="max-width:100%">
+            <div class="content has-text-justified">
+              <p align="justify">
+                <b>Figure 3.</b> Overview of our Retrieval-Augmented Generation (RAG) pipeline.
+                A <b>dual-track retrieval engine</b> processes unstructured SEC text and structured
+                time-series OHLCV chunks separately. The generation phase uses the
+                <b>TELeR taxonomy</b> to produce multiple candidate responses across the model zoo,
+                which are filtered via intra-model self-selection before evaluation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+
+      <!-- Statistics Table -->
       <div class="content has-text-justified">
+        <h3 class="title is-3 has-text-centered">Benchmark Statistics</h3>
+        <table border="1" cellspacing="0" cellpadding="5" style="width: 50%; margin: auto;">
+          <thead>
+            <tr style="background-color:whitesmoke;">
+              <th align="center" style="font-size: 13px;">Statistic</th>
+              <th align="center" style="font-size: 13px;">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color:beige;">
+              <td style="font-size: 13px;">Total benchmark questions</td>
+              <td align="center" style="font-size: 13px;">1,400</td>
+            </tr>
+            <tr style="background-color:whitesmoke;">
+              <td style="font-size: 13px;">Expert-authored seed questions</td>
+              <td align="center" style="font-size: 13px;">150 (50 per category)</td>
+            </tr>
+            <tr style="background-color:beige;">
+              <td style="font-size: 13px;">Companies covered</td>
+              <td align="center" style="font-size: 13px;">NASDAQ-100</td>
+            </tr>
+            <tr style="background-color:whitesmoke;">
+              <td style="font-size: 13px;">Time window</td>
+              <td align="center" style="font-size: 13px;">2015&ndash;2025 (10 years)</td>
+            </tr>
+            <tr style="background-color:beige;">
+              <td style="font-size: 13px;">Reasoning categories</td>
+              <td align="center" style="font-size: 13px;">F&nbsp;/&nbsp;T&nbsp;/&nbsp;FT</td>
+            </tr>
+            <tr style="background-color:whitesmoke;">
+              <td style="font-size: 13px;">LLMs evaluated</td>
+              <td align="center" style="font-size: 13px;">14 (proprietary &amp; open-source)</td>
+            </tr>
+            <tr style="background-color:beige;">
+              <td style="font-size: 13px;">Human&ndash;LLM judge alignment (MAE)</td>
+              <td align="center" style="font-size: 13px;">&lt; 10%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br><br>
+
+      <!-- ===================== RESULTS ===================== -->
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+          <h2 class="title is-3">Benchmarking and Evaluations</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              We benchmark 14 LLMs spanning <b>Large</b> (proprietary &amp; open-source, &gt;100B
+              parameters), <b>Mid</b>, and <b>Small</b> tiers under both <b>No-RAG</b> and
+              <b>RAG</b> settings. Evaluation uses a calibrated LLM-as-a-judge (Claude Sonnet 4.5)
+              aligned with expert human ratings.
+            </p>
+          </div>
+
+          <h3 class="title is-4 has-text-left">Key Takeaways</h3>
+          <div class="content has-text-centered">
+            <div class="content has-text-justified">
+              <p>
+                <b>(1) RAG strongly benefits fundamental reasoning (F) and degrades
+                  trading-signal reasoning (T).</b> R1-Distill-Qwen (32B) improves +37% on F-type
+                questions, Gemini 2.5 Flash gains +23.8%, and DeepSeek-R1 gains +23.6%. In contrast,
+                Gemini 2.5 Flash-Lite, GPT-5-mini, and LLaMA 3.3 Instruct (70B) drop 16&ndash;20%
+                on T-type questions even when the temporal retrieval track surfaces relevant price
+                chunks &mdash; models fail to compute indicators from raw numerical tables.
+              </p>
+            </div>
+
+            <img src="./static/images/results_main.png" alt="Main benchmarking results across LLMs."
+              style="max-width:100%">
+            <p align="justify">
+              <b>Table.</b> Overall and category-specific normalized correctness (%) across 14 LLMs
+              under No-RAG vs. RAG. &Delta; = (RAG &minus; No-RAG) / No-RAG &times; 100%. Significance
+              assessed via paired <i>t</i>-test (<i>p</i> &lt; 0.05, <i>p</i> &lt; 0.01).
+            </p>
+            <br>
+          </div>
+
+          <h3 class="title is-4 has-text-left">Reasoning LLMs Dominate Hybrid Questions</h3>
+          <div class="content has-text-centered">
+            <div class="content has-text-justified">
+              <p>
+                <b>(2)</b> Hybrid (FT) questions impose the highest cognitive load. DeepSeek-R1
+                achieved the highest Hybrid RAG accuracy at <b>46.4%</b> (+39.8% over its No-RAG
+                baseline). The capability transfers to distilled open-weight models:
+                <b>R1-Distill-Qwen (32B) +55.1%</b> and <b>R1-Distill-Qwen (14B) +49.5%</b> on FT
+                questions. Latent chain-of-thought reasoning is the differentiator &mdash; not
+                parameter count.
+              </p>
+            </div>
+            <img src="./static/images/quality_metric.png" alt="Global quality metrics: No-RAG vs RAG."
+              style="max-width:80%">
+            <p align="justify">
+              <b>Figure 4.</b> Global generative quality metrics. <b>Left:</b> Absolute scores
+              comparing No-RAG and RAG outputs. <b>Right:</b> Relative change (%) across metrics when
+              using RAG &mdash; Fundamental Integration improves +13.4%, but G.I. F1 collapses by
+              56.5% and Reasoning Depth drops 10.8%.
+            </p>
+            <br>
+          </div>
+
+          <h3 class="title is-4 has-text-left">LLMs are Distracted by RAG-Based Extra Information</h3>
+          <div class="content has-text-justified">
+            <p>
+              <b>(3)</b> Despite grounding answers in fundamental texts, the precise reasoning over
+              Golden Indicators <i>decreases</i> with RAG. This shows that dense financial context
+              improves <i>surface-level factual grounding</i> but actively suppresses the abstract
+              analytical reasoning that expert evaluation requires. Models absorb retrieved
+              documents and produce fluent, citation-heavy summaries, yet fail to isolate the
+              specific signals an expert would prioritize. <b>Injecting rich evidence while
+                preserving an LLM's analytical depth remains the central challenge in financial RAG.</b>
+            </p>
+          </div>
+
+          <br>
+
+          <h3 class="title is-4 has-text-left">Case Study: AAPL Valuation &amp; Momentum</h3>
+          <div class="content has-text-justified">
+            <p>
+              We qualitatively illustrate the distraction effect by comparing Gemini 2.5 Flash-Lite
+              outputs on a Hybrid (FT) query about Apple Inc. (AAPL) under three retrieval conditions:
+              <b>No-RAG</b>, <b>Standard RAG</b>, and an <b>Ideal RAG</b> with precomputed context.
+            </p>
+            <ul>
+              <li><b>No-RAG:</b> Produces generic textbook definitions of P/E, P/S, P/B, RSI &mdash;
+                no actual data, no conclusion.</li>
+              <li><b>Standard RAG:</b> Grounds the answer in real figures but is overwhelmed by raw
+                revenue totals and daily price points, failing to surface the required Golden
+                Indicators.</li>
+              <li><b>Ideal RAG (precomputed):</b> Correctly identifies the Book/Price ratio (0.02),
+                the RSI (60.39), and synthesizes a concrete investment conclusion.</li>
+            </ul>
+            <p>
+              This confirms that the bottleneck is <b>not</b> model capability but <b>context
+                structure</b>. When numerical signals are pre-computed rather than raw, a mid-tier
+              model can reason over them effectively.
+            </p>
+          </div>
+
+          <br>
+
+          <h3 class="title is-4 has-text-left">Conclusion</h3>
+          <div class="content has-text-justified">
+            <p>
+              We introduced <b>FinTradeBench</b> to evaluate financial reasoning across company
+              fundamentals, trading signals, and hybrid queries on a decade of NASDAQ-100 data using
+              a calibration-then-scaling framework. We benchmark 14 LLMs under No-RAG and RAG and
+              observe several key patterns. RAG yields statistically significant improvements for
+              fundamentals reasoning, where retrieved SEC filings activate strong prior knowledge,
+              but degrades performance on trading-signal questions. Latent reasoning models such as
+              DeepSeek-R1 and its distillations substantially outperform standard instruction-tuned
+              models on hybrid questions, and model families exhibit very different sensitivities to
+              context; Qwen models generally benefit from RAG while LLaMA models degrade
+              overall, even at 70B parameters. In future work we plan to augment FinTradeBench,
+              diversify the evaluation pipeline, and explore agentic RAG.
+            </p>
+            <p>For full details, please refer to the main paper. Thank you!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ===================== IN THE WILD / SOCIAL ===================== -->
+  <section class="section" id="social-media">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Media Coverage & Social</h2>
+      <div class="content has-text-centered">
+        <p>Coverage, threads, and posts where <i>FinTradeBench</i> has been discussed.</p>
+      </div>
+
+      <!-- =========== PRESS & BLOGS =========== -->
+      <h3 class="title is-4" style="margin-top:1.5rem;">Press &amp; Long-form Coverage</h3>
+      <div class="columns is-multiline">
+
+        <div class="column is-half">
+          <a class="social-card" href="https://www.auptim.ai/blog/intelligence-density-era-ai-efficiency-revolution"
+            target="_blank" style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fas fa-newspaper" style="color:#555;"></i>
+              <span class="platform">Auptim.ai</span>
+            </div>
+            <div class="title-text">Intelligence Density Era &mdash; the AI Efficiency Revolution</div>
+            <div class="meta">References FinTradeBench in a broader essay on AI efficiency.</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">Blog</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.swissfinanceai.ch/en/blog/news/fintradebench-a-financial-reasoning-benchmark-for-llms"
+            target="_blank" style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fas fa-newspaper" style="color:#555;"></i>
+              <span class="platform">Swiss Finance AI</span>
+            </div>
+            <div class="title-text">FinTradeBench: Financial Reasoning Benchmark for LLMs</div>
+            <div class="meta">Dedicated blog post referencing the arXiv paper.</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">Blog</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.wispaper.ai/en/blog/financial-reasoning-benchmark-for-llms-20260322/eng" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fas fa-newspaper" style="color:#555;"></i>
+              <span class="platform">WisPaper</span>
+            </div>
+            <div class="title-text">Bridging the Gap: Why LLMs Fail at Hybrid Financial Reasoning</div>
+            <div class="meta">Dedicated article (English + Chinese versions).</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">Article</span>
+              <span class="tag-pill">EN/ZH</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card" href="https://scirate.com/arxiv/2603.19225" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fas fa-newspaper" style="color:#555;"></i>
+              <span class="platform">scirate</span>
+            </div>
+            <div class="title-text">Top arXiv papers</div>
+            <div class="meta">FinTradeBench appears on a SciRate arXiv listing.</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">News</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.crebral.ai/work/document_analysis/c472babf-7811-4d61-b47f-845dc6aa71db" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fas fa-newspaper" style="color:#555;"></i>
+              <span class="platform">Crebral.ai</span>
+            </div>
+            <div class="title-text">[arXiv] FinTradeBench &mdash; Document Analysis</div>
+            <div class="meta">Short analysis of FinTradeBench's contribution.</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">Analysis</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.deepdyve.com/lp/arxiv/fintradebench-a-financial-reasoning-benchmark-for-llms-llRgQ7j5M1"
+            target="_blank" style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fas fa-newspaper" style="color:#555;"></i>
+              <span class="platform">DeepDyve</span>
+            </div>
+            <div class="title-text">FinTradeBench: A Financial Reasoning Benchmark for LLMs</div>
+            <div class="meta">Indexed paper page.</div>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- =========== VIDEO =========== -->
+      <h3 class="title is-4" style="margin-top:2rem;">Video</h3>
+      <div class="columns is-multiline">
+
+        <div class="column is-half">
+          <a class="social-card" href="https://www.youtube.com/watch?v=jsX60SLc1vk" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-youtube" style="color:#FF0000;"></i>
+              <span class="platform">YouTube</span>
+            </div>
+            <div class="title-text">FinTradeBench &mdash; video discussion</div>
+            <div class="meta">youtube.com/watch?v=jsX60SLc1vk</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">Video</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card" href="https://www.youtube.com/shorts/lG9kR7_dkgA" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-youtube" style="color:#FF0000;"></i>
+              <span class="platform">YouTube Shorts &middot; Learn By Doing With Steven</span>
+            </div>
+            <div class="title-text">Exposing the Numerical Blind Spots in Financial Language Models</div>
+            <div class="meta">Short-form explainer.</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">Short</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- =========== X / TWITTER =========== -->
+      <h3 class="title is-4" style="margin-top:2rem;">X (Twitter)</h3>
+      <div class="columns is-multiline">
+
+        <div class="column is-half">
+          <a class="social-card" href="https://x.com/saeedamenfx/status/2035703187106042152" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-x-twitter" style="color:#000;"></i>
+              <span class="platform">@saeedamenfx</span>
+            </div>
+            <div class="title-text">&ldquo;FinTradeBench: A Financial Reasoning Benchmark for LLMs&rdquo;</div>
+            <div class="meta">8 likes &middot; 826 views (at time of indexing)</div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card" href="https://x.com/AlexZio00/status/2036035818083749952" target="_blank"
+            style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-x-twitter" style="color:#000;"></i>
+              <span class="platform">@AlexZio00</span>
+            </div>
+            <div class="title-text">Korean-language thread on FinTradeBench's main finding</div>
+            <div class="meta">Discussion of LLM weaknesses on narrative / time-series finance.</div>
+            <div style="margin-top:.5rem;">
+              <span class="tag-pill">KO</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- =========== LINKEDIN =========== -->
+      <h3 class="title is-4" style="margin-top:2rem;">LinkedIn</h3>
+      <div class="columns is-multiline">
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.linkedin.com/posts/bayeslabs_fintradebench-activity-7445326672553308161-whr2"
+            target="_blank" style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-linkedin" style="color:#0A66C2;"></i>
+              <span class="platform">Bayes Labs</span>
+            </div>
+            <div class="title-text">Research Paper Highlights: FinTradeBench</div>
+            <div class="meta">Full summary of challenges, takeaways, and findings.</div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.linkedin.com/posts/hanane-d-algo-trader_ai-agents-are-moving-into-institutional-finance-activity-7449151287654436864-T7GI"
+            target="_blank" style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-linkedin" style="color:#0A66C2;"></i>
+              <span class="platform">Hanane D.</span>
+            </div>
+            <div class="title-text">5 papers worth reading &mdash; FinTradeBench listed as #1</div>
+            <div class="meta">Round-up on AI agents in institutional finance.</div>
+          </a>
+        </div>
+
+        <div class="column is-half">
+          <a class="social-card"
+            href="https://www.linkedin.com/posts/kalyanksnlp_llms-rag-aiagents-activity-7441713699758899200-HaYG"
+            target="_blank" style="display:block; color:inherit; text-decoration:none;">
+            <div class="icon-row">
+              <i class="fab fa-linkedin" style="color:#0A66C2;"></i>
+              <span class="platform">Kalyan KS</span>
+            </div>
+            <div class="title-text">Weekly LLM / RAG / Agents research update</div>
+            <div class="meta">FinTradeBench included in the weekly digest.</div>
+          </a>
+        </div>
+
+
+
+      </div>
+
+      <!-- =========== INDEXING SITES =========== -->
+      <h3 class="title is-4" style="margin-top:2rem;">Indexing &amp; Bibliographic</h3>
+      <div class="content">
         <p>
-          Real-world financial decision-making is a challenging problem that requires reasoning over
-          heterogeneous signals, including company fundamentals derived from regulatory filings and
-          trading signals computed from price dynamics. Recently, with advances in Large Language
-          Models (LLMs), financial analysts have begun to use them for financial decision-making
-          tasks. However, existing financial question-answering benchmarks for testing these models
-          primarily focus on company balance sheet data and rarely evaluate reasoning about how
-          company stocks trade in the market or their interactions with fundamentals. To leverage
-          the strengths of both approaches, we introduce <b>FinTradeBench</b>, a benchmark for
-          evaluating financial reasoning that integrates company fundamentals and trading signals.
-          FinTradeBench contains <b>1,400 questions</b> grounded in NASDAQ-100 companies over a
-          ten-year historical window. The benchmark is organized into three reasoning categories:
-          <i>fundamentals-focused</i>, <i>trading-signal-focused</i>, and <i>hybrid</i> questions
-          requiring cross-signal reasoning. To ensure reliability at scale, we adopt a
-          <i>calibration-then-scaling</i> framework that combines expert seed questions,
-          multi-model response generation, intra-model self-filtering, numerical auditing, and
-          human&ndash;LLM judge alignment. We evaluate <b>14 LLMs</b> under zero-shot prompting and
-          retrieval-augmented settings and witness a clear performance gap. Retrieval substantially
-          improves reasoning over textual fundamentals, but provides limited benefit for
-          trading-signal reasoning. These findings highlight fundamental challenges in numerical
-          and time-series reasoning for current LLMs and motivate future research in financial
-          intelligence.
+          <a href="https://www.alphaxiv.org/overview/2603.19225v1" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">AlphaXiv</a>
+          <a href="https://dblp.org/pid/150/3985" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">DBLP</a>
+          <a href="https://ideas.repec.org/p/arx/papers/2603.19225.html" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">RePEc / IDEAS</a>
+          <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260319225A/abstract" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">Harvard ADS</a>
+          <a href="https://www.researchgate.net/publication/402860255_FinTradeBench_A_Financial_Reasoning_Benchmark_for_LLMs"
+            target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">ResearchGate</a>
+          <a href="https://www.catalyzex.com/author/Yogesh%20Agrawal" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">CatalyzeX</a>
+          <a href="https://scirate.com/?date=2026-03-26&page=109&range=7" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">SciRate</a>
+          <a href="https://gptget.net/papers/2603.19225?lang=en" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">GPTGet</a>
+          <a href="https://www.scribd.com/document/1015635345/2603-19225v1" target="_blank" class="tag-pill"
+            style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">Scribd</a>
+        </p>
+      </div>
+
+      <div class="content has-text-centered" style="margin-top:2rem;">
+        <p style="color:#888; font-size:0.9rem;">
+          Spotted another mention? Please
+          <a href="https://github.com/fintradebench-anonymous/PaperSubmission" target="_blank">open an issue on the
+            repo</a>
+          and we'll add it.
         </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== CONTRIBUTIONS ===================== -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">
-          <i>FinTradeBench</i> is the first benchmark that jointly evaluates LLM reasoning over
-          company fundamentals and trading signals.
-        </h2>
-        <div class="content has-text-justified">
-          <h5><b>Main contributions:</b></h5>
-          <ol>
-            <li>
-              <b>FinTradeBench Benchmark.</b> A new benchmark of 1,400 questions grounded in
-              NASDAQ-100 companies over a decade (2015-2025), integrating SEC filings
-              (10-K/10-Q) and daily OHLCV trading data. Each question is annotated with
-              <i>Golden Indicators</i> - the minimal set of financial variables required to
-              support a correct answer.
-            </li>
-            <li>
-              <b>Three-Category Question Taxonomy.</b> Questions are split into
-              <i>Fundamentals-Focused (F)</i>, <i>Trading-Focused (T)</i>, and <i>Hybrid (FT)</i>
-              reasoning, enabling granular diagnosis of where models succeed and fail.
-            </li>
-            <li>
-              <b>Calibration-then-Scaling Framework.</b> A scalable pipeline that combines
-              150 expert-authored seed questions, multi-model candidate generation, intra-model
-              self-filtering, automated numerical auditing, and human-LLM judge alignment
-              (MAE&nbsp;&lt;&nbsp;10%) before scaling to the full 1,400-question benchmark.
-            </li>
-            <li>
-              <b>Benchmarking 14 LLMs under No-RAG and RAG.</b> RAG yields large gains on
-              fundamentals (+37%) and hybrid (+55%) questions, but limited or negative gains on
-              trading-signal questions, exposing a retrieval-to-reasoning bottleneck for
-              numerical time-series data.
-            </li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== PIPELINE ===================== -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">FinTradeBench Design Pipeline</h2>
-        <div class="content has-text-centered">
-          <img src="./static/images/pipeline.png"
-               alt="FinTradeBench design pipeline"
-               style="max-width:100%">
-          <div class="content has-text-justified">
-            <p align="justify">
-              <b>Figure 2.</b> The FinTradeBench design pipeline has three primary components:
-              <b><span style="color: blue;">(1) Data &amp; Design (Left)</span></b>: We aggregate
-              regulatory filings (SEC 10-K / 10-Q) and daily OHLCV trading data for NASDAQ-100
-              companies over 2015&ndash;2025, aligned by ticker and quarter;
-              <b><span style="color: blue;">(2) Question Taxonomy (Middle-left)</span></b>: F,
-              T, and FT categories each annotated with Golden Indicators;
-              <b><span style="color: blue;">(3) Calibration-then-Scaling (Middle-right &amp; Right)</span></b>: expert-guided seed construction, evaluation &amp; human&ndash;LLM judge
-              alignment, followed by automated scaling.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <br><br>
-
-    <!-- Question Taxonomy -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Question Taxonomy</h2>
-        <div class="content has-text-justified">
-          <p>
-            FinTradeBench questions are organized into three reasoning categories that probe
-            distinct competencies. Each question is paired with expert-defined
-            <b>Golden Indicators (G.I.)</b> - the minimal set of financial variables required
-            to support a correct answer.
-          </p>
-          <ul>
-            <li>
-              <b>Fundamentals-Focused (F-type):</b> Reasoning over accounting-based indicators such
-              as ROA, ROE, Earnings/Price, Book/Price, Debt/Equity, and Sales/Assets, extracted
-              from regulatory filings.
-            </li>
-            <li>
-              <b>Trading-Focused (T-type):</b> Reasoning over price&ndash;time-series derived
-              indicators such as moving averages, momentum, realized volatility, drawdowns, and
-              volume measures.
-            </li>
-            <li>
-              <b>Hybrid (FT-type):</b> Joint reasoning across both fundamental and trading signals; the highest cognitive-load category, requiring models to reconcile potentially
-              conflicting evidence.
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
-    <!-- RAG Architecture -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Domain-Aware Hybrid Retrieval (RAG)</h2>
-        <div class="content has-text-centered">
-          <img src="./static/images/rag_architecture.png"
-               alt="Dual-track RAG pipeline used in FinTradeBench."
-               style="max-width:100%">
-          <div class="content has-text-justified">
-            <p align="justify">
-              <b>Figure 3.</b> Overview of our Retrieval-Augmented Generation (RAG) pipeline.
-              A <b>dual-track retrieval engine</b> processes unstructured SEC text and structured
-              time-series OHLCV chunks separately. The generation phase uses the
-              <b>TELeR taxonomy</b> to produce multiple candidate responses across the model zoo,
-              which are filtered via intra-model self-selection before evaluation.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <br><br>
-
-    <!-- Statistics Table -->
-    <div class="content has-text-justified">
-      <h3 class="title is-3 has-text-centered">Benchmark Statistics</h3>
-      <table border="1" cellspacing="0" cellpadding="5" style="width: 50%; margin: auto;">
-        <thead>
-          <tr style="background-color:whitesmoke;">
-            <th align="center" style="font-size: 13px;">Statistic</th>
-            <th align="center" style="font-size: 13px;">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background-color:beige;">
-            <td style="font-size: 13px;">Total benchmark questions</td>
-            <td align="center" style="font-size: 13px;">1,400</td>
-          </tr>
-          <tr style="background-color:whitesmoke;">
-            <td style="font-size: 13px;">Expert-authored seed questions</td>
-            <td align="center" style="font-size: 13px;">150 (50 per category)</td>
-          </tr>
-          <tr style="background-color:beige;">
-            <td style="font-size: 13px;">Companies covered</td>
-            <td align="center" style="font-size: 13px;">NASDAQ-100</td>
-          </tr>
-          <tr style="background-color:whitesmoke;">
-            <td style="font-size: 13px;">Time window</td>
-            <td align="center" style="font-size: 13px;">2015&ndash;2025 (10 years)</td>
-          </tr>
-          <tr style="background-color:beige;">
-            <td style="font-size: 13px;">Reasoning categories</td>
-            <td align="center" style="font-size: 13px;">F&nbsp;/&nbsp;T&nbsp;/&nbsp;FT</td>
-          </tr>
-          <tr style="background-color:whitesmoke;">
-            <td style="font-size: 13px;">LLMs evaluated</td>
-            <td align="center" style="font-size: 13px;">14 (proprietary &amp; open-source)</td>
-          </tr>
-          <tr style="background-color:beige;">
-            <td style="font-size: 13px;">Human&ndash;LLM judge alignment (MAE)</td>
-            <td align="center" style="font-size: 13px;">&lt; 10%</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <br><br>
-
-    <!-- ===================== RESULTS ===================== -->
-    <div class="columns is-centered">
-      <div class="column is-full-width has-text-centered">
-        <h2 class="title is-3">Benchmarking and Evaluations</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            We benchmark 14 LLMs spanning <b>Large</b> (proprietary &amp; open-source, &gt;100B
-            parameters), <b>Mid</b>, and <b>Small</b> tiers under both <b>No-RAG</b> and
-            <b>RAG</b> settings. Evaluation uses a calibrated LLM-as-a-judge (Claude Sonnet 4.5)
-            aligned with expert human ratings.
-          </p>
-        </div>
-
-        <h3 class="title is-4 has-text-left">Main Results</h3>
-        <div class="content has-text-centered">
-          <div class="content has-text-justified">
-            <p>
-              <b>(1) RAG strongly benefits fundamental reasoning (F) and degrades
-              trading-signal reasoning (T).</b> R1-Distill-Qwen (32B) improves +37% on F-type
-              questions, Gemini 2.5 Flash gains +23.8%, and DeepSeek-R1 gains +23.6%. In contrast,
-              Gemini 2.5 Flash-Lite, GPT-5-mini, and LLaMA 3.3 Instruct (70B) drop 16&ndash;20%
-              on T-type questions even when the temporal retrieval track surfaces relevant price
-              chunks &mdash; models fail to compute indicators from raw numerical tables.
-            </p>
-          </div>
-
-          <img src="./static/images/results_main.png"
-               alt="Main benchmarking results across LLMs."
-               style="max-width:100%">
-          <p align="justify">
-            <b>Table.</b> Overall and category-specific normalized correctness (%) across 14 LLMs
-            under No-RAG vs. RAG. &Delta; = (RAG &minus; No-RAG) / No-RAG &times; 100%. Significance
-            assessed via paired <i>t</i>-test (<i>p</i> &lt; 0.05, <i>p</i> &lt; 0.01).
-          </p>
-          <br>
-        </div>
-
-        <h3 class="title is-4 has-text-left">Reasoning LLMs Dominate Hybrid Questions</h3>
-        <div class="content has-text-centered">
-          <div class="content has-text-justified">
-            <p>
-              <b>(2)</b> Hybrid (FT) questions impose the highest cognitive load. DeepSeek-R1
-              achieved the highest Hybrid RAG accuracy at <b>46.4%</b> (+39.8% over its No-RAG
-              baseline). The capability transfers to distilled open-weight models:
-              <b>R1-Distill-Qwen (32B) +55.1%</b> and <b>R1-Distill-Qwen (14B) +49.5%</b> on FT
-              questions. Latent chain-of-thought reasoning is the differentiator &mdash; not
-              parameter count.
-            </p>
-          </div>
-          <img src="./static/images/quality_metric.png"
-               alt="Global quality metrics: No-RAG vs RAG."
-               style="max-width:80%">
-          <p align="justify">
-            <b>Figure 4.</b> Global generative quality metrics. <b>Left:</b> Absolute scores
-            comparing No-RAG and RAG outputs. <b>Right:</b> Relative change (%) across metrics when
-            using RAG &mdash; Fundamental Integration improves +13.4%, but G.I. F1 collapses by
-            56.5% and Reasoning Depth drops 10.8%.
-          </p>
-          <br>
-        </div>
-
-        <h3 class="title is-4 has-text-left">LLMs are Distracted by RAG-Based Extra Information</h3>
-        <div class="content has-text-justified">
-          <p>
-            <b>(3)</b> Despite grounding answers in fundamental texts, the precise reasoning over
-            Golden Indicators <i>decreases</i> with RAG. This shows that dense financial context
-            improves <i>surface-level factual grounding</i> but actively suppresses the abstract
-            analytical reasoning that expert evaluation requires. Models absorb retrieved
-            documents and produce fluent, citation-heavy summaries, yet fail to isolate the
-            specific signals an expert would prioritize. <b>Injecting rich evidence while
-            preserving an LLM's analytical depth remains the central challenge in financial RAG.</b>
-          </p>
-        </div>
-
-        <br>
-
-        <h3 class="title is-4 has-text-left">Case Study: AAPL Valuation &amp; Momentum</h3>
-        <div class="content has-text-justified">
-          <p>
-            We qualitatively illustrate the distraction effect by comparing Gemini 2.5 Flash-Lite
-            outputs on a Hybrid (FT) query about Apple Inc. (AAPL) under three retrieval conditions:
-            <b>No-RAG</b>, <b>Standard RAG</b>, and an <b>Ideal RAG</b> with precomputed context.
-          </p>
-          <ul>
-            <li><b>No-RAG:</b> Produces generic textbook definitions of P/E, P/S, P/B, RSI &mdash;
-              no actual data, no conclusion.</li>
-            <li><b>Standard RAG:</b> Grounds the answer in real figures but is overwhelmed by raw
-              revenue totals and daily price points, failing to surface the required Golden
-              Indicators.</li>
-            <li><b>Ideal RAG (precomputed):</b> Correctly identifies the Book/Price ratio (0.02),
-              the RSI (60.39), and synthesizes a concrete investment conclusion.</li>
-          </ul>
-          <p>
-            This confirms that the bottleneck is <b>not</b> model capability but <b>context
-            structure</b>. When numerical signals are pre-computed rather than raw, a mid-tier
-            model can reason over them effectively.
-          </p>
-        </div>
-
-        <br>
-
-        <h3 class="title is-4 has-text-left">Conclusion</h3>
-        <div class="content has-text-justified">
-          <p>
-            We introduced <b>FinTradeBench</b> to evaluate financial reasoning across company
-            fundamentals, trading signals, and hybrid queries on a decade of NASDAQ-100 data using
-            a calibration-then-scaling framework. We benchmark 14 LLMs under No-RAG and RAG and
-            observe several key patterns. RAG yields statistically significant improvements for
-            fundamentals reasoning, where retrieved SEC filings activate strong prior knowledge,
-            but degrades performance on trading-signal questions. Latent reasoning models such as
-            DeepSeek-R1 and its distillations substantially outperform standard instruction-tuned
-            models on hybrid questions, and model families exhibit very different sensitivities to
-            context; Qwen models generally benefit from RAG while LLaMA models degrade
-            overall, even at 70B parameters. In future work we plan to augment FinTradeBench,
-            diversify the evaluation pipeline, and explore agentic RAG.
-          </p>
-          <p>For full details, please refer to the main paper. Thank you!</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CITED BY ===================== -->
-<section class="section" id="cited-by">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Cited By</h2>
-    <div class="content has-text-centered">
-      <p>Papers that cite <i>FinTradeBench</i>. If we missed your paper, please
-        <a href="https://github.com/fintradebench-anonymous/PaperSubmission" target="_blank">open an issue</a>.</p>
-    </div>
-
-    <div class="columns is-multiline">
-
-      <div class="column is-half">
-        <a class="social-card" href="https://arxiv.org/abs/2606.05522" target="_blank"
-           style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="ai ai-arxiv" style="color:#B31B1B;"></i>
-            <span class="platform">arXiv:2606.05522</span>
-          </div>
-          <div class="title-text">Exploring LLMs for South Asian Music Understanding and Generation (June 2026)</div>
-          <div class="meta">View on arXiv &rarr;</div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card" href="https://arxiv.org/abs/2606.03829" target="_blank"
-           style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="ai ai-arxiv" style="color:#B31B1B;"></i>
-            <span class="platform">arXiv:2606.03829</span>
-          </div>
-          <div class="title-text">BigFinanceBench: A Workflow-Grounded Benchmark for Financial-Research Agents
- (June 2026)</div>
-          <div class="meta">View on arXiv &rarr;</div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card" href="https://arxiv.org/abs/2605.09185" target="_blank"
-           style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="ai ai-arxiv" style="color:#B31B1B;"></i>
-            <span class="platform">arXiv:2605.09185</span>
-          </div>
-          <div class="title-text">AutoRedTrader: Autonomous Red Teaming of Trading Agents through Synthetic Misinformation Injection (May 2026)</div>
-          <div class="meta">View on arXiv &rarr; &middot; <span style="font-style:italic;">not yet indexed by Google Scholar</span></div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card" href="https://arxiv.org/abs/2604.18576" target="_blank"
-           style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="ai ai-arxiv" style="color:#B31B1B;"></i>
-            <span class="platform">arXiv:2604.18576</span>
-          </div>
-          <div class="title-text">Agentic Forecasting using Sequential Bayesian Updating of Linguistic Beliefs (April 2026)</div>
-          <div class="meta">View on arXiv &rarr; &middot; <span style="font-style:italic;">not yet indexed by Google Scholar</span></div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6815399" target="_blank"
-           style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="ai ai-ssrn" style="color:#871d2c;"></i>
-            <span class="platform">SSRN: 6815399</span>
-          </div>
-          <div class="title-text">Evaluating AI in Finance: A Comprehensive Review and Taxonomy of LLM Benchmarks (SSRN preprint)</div>
-          <div class="meta">View on SSRN &rarr;</div>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===================== IN THE WILD / SOCIAL ===================== -->
-<section class="section" id="social-media">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">In the Wild &middot; Press, Talks &amp; Social</h2>
-    <div class="content has-text-centered">
-      <p>Coverage, threads, and posts where <i>FinTradeBench</i> has been discussed.</p>
-    </div>
-
-    <!-- =========== PRESS & BLOGS =========== -->
-    <h3 class="title is-4" style="margin-top:1.5rem;">Press &amp; Long-form Coverage</h3>
-    <div class="columns is-multiline">
-
-      <div class="column is-half">
-        <a class="social-card" href="https://www.auptim.ai/blog/intelligence-density-era-ai-efficiency-revolution"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fas fa-newspaper" style="color:#555;"></i>
-            <span class="platform">Auptim.ai</span>
-          </div>
-          <div class="title-text">Intelligence Density Era &mdash; the AI Efficiency Revolution</div>
-          <div class="meta">References FinTradeBench in a broader essay on AI efficiency.</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">Blog</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.swissfinanceai.ch/en/blog/news/fintradebench-a-financial-reasoning-benchmark-for-llms"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fas fa-newspaper" style="color:#555;"></i>
-            <span class="platform">Swiss Finance AI</span>
-          </div>
-          <div class="title-text">FinTradeBench: Financial Reasoning Benchmark for LLMs</div>
-          <div class="meta">Dedicated blog post referencing the arXiv paper.</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">Blog</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.wispaper.ai/en/blog/financial-reasoning-benchmark-for-llms-20260322/eng"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fas fa-newspaper" style="color:#555;"></i>
-            <span class="platform">WisPaper</span>
-          </div>
-          <div class="title-text">Bridging the Gap: Why LLMs Fail at Hybrid Financial Reasoning</div>
-          <div class="meta">Dedicated article (English + Chinese versions).</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">Article</span>
-            <span class="tag-pill">EN/ZH</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://scirate.com/arxiv/2603.19225"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fas fa-newspaper" style="color:#555;"></i>
-            <span class="platform">scirate</span>
-          </div>
-          <div class="title-text">Top arXiv papers</div>
-          <div class="meta">FinTradeBench appears on a SciRate arXiv listing.</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">News</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.crebral.ai/work/document_analysis/c472babf-7811-4d61-b47f-845dc6aa71db"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fas fa-newspaper" style="color:#555;"></i>
-            <span class="platform">Crebral.ai</span>
-          </div>
-          <div class="title-text">[arXiv] FinTradeBench &mdash; Document Analysis</div>
-          <div class="meta">Short analysis of FinTradeBench's contribution.</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">Analysis</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.deepdyve.com/lp/arxiv/fintradebench-a-financial-reasoning-benchmark-for-llms-llRgQ7j5M1"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fas fa-newspaper" style="color:#555;"></i>
-            <span class="platform">DeepDyve</span>
-          </div>
-          <div class="title-text">FinTradeBench: A Financial Reasoning Benchmark for LLMs</div>
-          <div class="meta">Indexed paper page.</div>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- =========== VIDEO =========== -->
-    <h3 class="title is-4" style="margin-top:2rem;">Video</h3>
-    <div class="columns is-multiline">
-
-      <div class="column is-half">
-        <a class="social-card" href="https://www.youtube.com/watch?v=jsX60SLc1vk"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-youtube" style="color:#FF0000;"></i>
-            <span class="platform">YouTube</span>
-          </div>
-          <div class="title-text">FinTradeBench &mdash; video discussion</div>
-          <div class="meta">youtube.com/watch?v=jsX60SLc1vk</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">Video</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card" href="https://www.youtube.com/shorts/lG9kR7_dkgA"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-youtube" style="color:#FF0000;"></i>
-            <span class="platform">YouTube Shorts &middot; Learn By Doing With Steven</span>
-          </div>
-          <div class="title-text">Exposing the Numerical Blind Spots in Financial Language Models</div>
-          <div class="meta">Short-form explainer.</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">Short</span>
-          </div>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- =========== X / TWITTER =========== -->
-    <h3 class="title is-4" style="margin-top:2rem;">X (Twitter)</h3>
-    <div class="columns is-multiline">
-
-      <div class="column is-half">
-        <a class="social-card" href="https://x.com/saeedamenfx/status/2035703187106042152"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-x-twitter" style="color:#000;"></i>
-            <span class="platform">@saeedamenfx</span>
-          </div>
-          <div class="title-text">&ldquo;FinTradeBench: A Financial Reasoning Benchmark for LLMs&rdquo;</div>
-          <div class="meta">8 likes &middot; 826 views (at time of indexing)</div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card" href="https://x.com/AlexZio00/status/2036035818083749952"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-x-twitter" style="color:#000;"></i>
-            <span class="platform">@AlexZio00</span>
-          </div>
-          <div class="title-text">Korean-language thread on FinTradeBench's main finding</div>
-          <div class="meta">Discussion of LLM weaknesses on narrative / time-series finance.</div>
-          <div style="margin-top:.5rem;">
-            <span class="tag-pill">KO</span>
-          </div>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- =========== LINKEDIN =========== -->
-    <h3 class="title is-4" style="margin-top:2rem;">LinkedIn</h3>
-    <div class="columns is-multiline">
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.linkedin.com/posts/bayeslabs_fintradebench-activity-7445326672553308161-whr2"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-linkedin" style="color:#0A66C2;"></i>
-            <span class="platform">Bayes Labs</span>
-          </div>
-          <div class="title-text">Research Paper Highlights: FinTradeBench</div>
-          <div class="meta">Full summary of challenges, takeaways, and findings.</div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.linkedin.com/posts/hanane-d-algo-trader_ai-agents-are-moving-into-institutional-finance-activity-7449151287654436864-T7GI"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-linkedin" style="color:#0A66C2;"></i>
-            <span class="platform">Hanane D.</span>
-          </div>
-          <div class="title-text">5 papers worth reading &mdash; FinTradeBench listed as #1</div>
-          <div class="meta">Round-up on AI agents in institutional finance.</div>
-        </a>
-      </div>
-
-      <div class="column is-half">
-        <a class="social-card"
-           href="https://www.linkedin.com/posts/kalyanksnlp_llms-rag-aiagents-activity-7441713699758899200-HaYG"
-           target="_blank" style="display:block; color:inherit; text-decoration:none;">
-          <div class="icon-row">
-            <i class="fab fa-linkedin" style="color:#0A66C2;"></i>
-            <span class="platform">Kalyan KS</span>
-          </div>
-          <div class="title-text">Weekly LLM / RAG / Agents research update</div>
-          <div class="meta">FinTradeBench included in the weekly digest.</div>
-        </a>
-      </div>
-
-
-
-    </div>
-
-    <!-- =========== INDEXING SITES =========== -->
-    <h3 class="title is-4" style="margin-top:2rem;">Indexing &amp; Bibliographic</h3>
-    <div class="content">
-      <p>
-        <a href="https://www.alphaxiv.org/overview/2603.19225v1" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">AlphaXiv</a>
-        <a href="https://dblp.org/pid/150/3985" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">DBLP</a>
-        <a href="https://ideas.repec.org/p/arx/papers/2603.19225.html" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">RePEc / IDEAS</a>
-        <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260319225A/abstract" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">Harvard ADS</a>
-        <a href="https://www.researchgate.net/publication/402860255_FinTradeBench_A_Financial_Reasoning_Benchmark_for_LLMs" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">ResearchGate</a>
-        <a href="https://www.catalyzex.com/author/Yogesh%20Agrawal" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">CatalyzeX</a>
-        <a href="https://scirate.com/?date=2026-03-26&page=109&range=7" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">SciRate</a>
-        <a href="https://gptget.net/papers/2603.19225?lang=en" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">GPTGet</a>
-        <a href="https://www.scribd.com/document/1015635345/2603-19225v1" target="_blank" class="tag-pill" style="background:#eef2ff; color:#3949ab; padding:6px 12px; text-decoration:none;">Scribd</a>
-      </p>
-    </div>
-
-    <div class="content has-text-centered" style="margin-top:2rem;">
-      <p style="color:#888; font-size:0.9rem;">
-        Spotted another mention? Please
-        <a href="https://github.com/fintradebench-anonymous/PaperSubmission" target="_blank">open an issue on the repo</a>
-        and we'll add it.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== BIBTEX ===================== -->
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title"><a id="bibtex">BibTeX</a></h2>
-<pre><code>@article{agrawal2026fintradebench,
+  <!-- ===================== BIBTEX ===================== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title"><a id="bibtex">BibTeX</a></h2>
+      <pre><code>@article{agrawal2026fintradebench,
   title   = {Fintradebench: A financial reasoning benchmark for llms},
   author  = {Agrawal, Yogesh and Dutta, Aniruddha and Hasan, Md Mahadi and Karmaker, Santu and Dutta, Aritra},
   journal = {arXiv preprint arXiv:2603.19225},
   year    = {2026}
 }
 </code></pre>
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- ===================== FOOTER ===================== -->
-<footer class="footer">
-  <div class="columns is-centered">
-    <div class="column is-8">
-      <div class="content">
-        <p>
-          Website adapted from the
-          <a href="https://ucf-crcv.github.io/GAEA/" target="_blank">GAEA project page</a>,
-          which is itself adapted from
-          <a href="https://mingukkang.github.io/GigaGAN/" target="_blank">this source code</a>.
-        </p>
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website adapted from the
+            <a href="https://ucf-crcv.github.io/GAEA/" target="_blank">GAEA project page</a>,
+            which is itself adapted from
+            <a href="https://mingukkang.github.io/GigaGAN/" target="_blank">this source code</a>.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
 </body>
+
 </html>
